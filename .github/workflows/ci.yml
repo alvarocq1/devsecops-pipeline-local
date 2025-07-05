@@ -14,7 +14,7 @@ jobs:  # Puedes tener uno o varios jobs (bloques de ejecución)
     steps:  # Pasos del job (van en orden)
 
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       # Clona tu repo en la máquina para que se pueda analizar
 
     - name: Set up Python
