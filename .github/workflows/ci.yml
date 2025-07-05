@@ -33,17 +33,13 @@ jobs:  # Puedes tener uno o varios jobs (bloques de ejecución)
       run: |
         bandit -r app -ll
 
-    - name: Install Gitleaks
-      run: |
-        curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64.tar.gz | tar -xz
-        chmod +x gitleaks
-        sudo mv gitleaks /usr/local/bin/
+    - name: Run Gitleaks
+      uses: gitleaks/gitleaks-action@v2
+      with:
+        scan-mode: "source"
+        report-format: "sarif"
+        report-path: "gitleaks-report.sarif"
 
-
-    - name: Run Gitleaks (secret scanning)
-      continue-on-error: true
-      run: |
-        gitleaks detect --source=. --no-git --report-format sarif --report-path gitleaks-report.sarif
 
     - name: Upload Gitleaks report
       if: always()
