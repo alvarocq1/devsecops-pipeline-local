@@ -46,7 +46,7 @@ jobs:  # Puedes tener uno o varios jobs (bloques de ejecución)
 
     - name: Upload Gitleaks report
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: gitleaks-report
         path: gitleaks-report.sarif
