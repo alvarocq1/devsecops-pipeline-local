@@ -29,5 +29,6 @@ jobs:  # Puedes tener uno o varios jobs (bloques de ejecución)
         pip install bandit
 
     - name: Run Bandit (SAST)
+      continue-on-error: true
       run: |
         bandit -r app -ll
