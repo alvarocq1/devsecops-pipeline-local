@@ -35,9 +35,10 @@ jobs:  # Puedes tener uno o varios jobs (bloques de ejecución)
 
     - name: Install Gitleaks
       run: |
-        curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -o gitleaks
+        curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64.tar.gz | tar -xz
         chmod +x gitleaks
-        sudo mv gitleaks /usr/local/bin
+        sudo mv gitleaks /usr/local/bin/
+
 
     - name: Run Gitleaks (secret scanning)
       continue-on-error: true
