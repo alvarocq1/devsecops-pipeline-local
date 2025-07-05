@@ -32,3 +32,22 @@ jobs:  # Puedes tener uno o varios jobs (bloques de ejecución)
       continue-on-error: true
       run: |
         bandit -r app -ll
+
+    - name: Install Gitleaks
+      run: |
+        curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -o gitleaks
+        chmod +x gitleaks
+        sudo mv gitleaks /usr/local/bin
+
+    - name: Run Gitleaks (secret scanning)
+      continue-on-error: true
+      run: |
+        gitleaks detect --source=. --no-git --report-format sarif --report-path gitleaks-report.sarif
+
+    - name: Upload Gitleaks report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: gitleaks-report
+        path: gitleaks-report.sarif
+
